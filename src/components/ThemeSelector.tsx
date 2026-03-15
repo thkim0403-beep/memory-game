@@ -61,36 +61,37 @@ export default function ThemeSelector({ selected, onSelect }: ThemeSelectorProps
     : null;
 
   return (
-    <div className="mb-4 w-full max-w-6xl mx-auto">
-      <div className="flex flex-col items-center gap-1 md:gap-2 mb-4">
-        <div className="flex flex-wrap items-center justify-center gap-2 md:gap-4">
-          <h2 className="text-2xl md:text-5xl font-bold text-center">카드 테마를 골라봐!</h2>
-          <span className="text-sm md:text-xl bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300 font-bold px-3 py-1 md:px-4 md:py-2 rounded-full">
+    <div className="mb-1 md:mb-2 w-full max-w-6xl mx-auto">
+      <div className="flex flex-col items-center gap-0.5 md:gap-1 mb-2">
+        <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3">
+          <h2 className="text-xl md:text-4xl font-bold text-center">카드 테마를 골라봐!</h2>
+          <span className="text-xs md:text-lg bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300 font-bold px-2 py-0.5 md:px-3 md:py-1 rounded-full">
             🔓 {getUnlockedCount()}/{getTotalThemeCount()}
           </span>
         </div>
         {getUnlockedCount() < getTotalThemeCount() && (
-          <p className="text-xs md:text-base text-gray-500 dark:text-gray-400">
+          <p className="text-[10px] md:text-sm text-gray-500 dark:text-gray-400">
             🎯 게임을 클리어할 때마다 새로운 테마가 해금돼요!
           </p>
         )}
       </div>
 
+      <div className="max-h-[28vh] md:max-h-[30vh] overflow-y-auto pr-1 scrollbar-thin">
       {themeGroups.map((group) => {
         const isOpen = openGroup === group.label;
         const hasSelected = group.keys.includes(selected);
 
         return (
-          <div key={group.label} className="mb-2">
+          <div key={group.label} className="mb-0.5 md:mb-1">
             <button
               onClick={() => setOpenGroup(isOpen ? '' : group.label)}
-              className={`flex items-center gap-2 w-full text-left text-lg md:text-2xl font-bold mb-1 px-2 py-1 rounded-lg transition-colors ${
+              className={`flex items-center gap-1.5 w-full text-left text-sm md:text-xl font-bold mb-0.5 px-2 py-0.5 rounded-lg transition-colors ${
                 hasSelected ? 'text-purple-600 dark:text-purple-400' : 'text-gray-500 dark:text-gray-400'
               } hover:bg-white/30 dark:hover:bg-gray-700/30`}
             >
               <span className={`transition-transform ${isOpen ? 'rotate-90' : ''}`}>▶</span>
               <span>{group.icon} {group.label}</span>
-              {hasSelected && <span className="text-sm bg-purple-200 dark:bg-purple-800 px-2 py-0.5 rounded-full">{themes[selected].icon} {themes[selected].name}</span>}
+              {hasSelected && <span className="text-xs md:text-sm bg-purple-200 dark:bg-purple-800 px-1.5 py-0.5 rounded-full">{themes[selected].icon} {themes[selected].name}</span>}
             </button>
             <AnimatePresence>
               {isOpen && (
@@ -101,7 +102,7 @@ export default function ThemeSelector({ selected, onSelect }: ThemeSelectorProps
                   transition={{ duration: 0.2 }}
                   className="overflow-hidden"
                 >
-                  <div className="flex flex-wrap gap-2 md:gap-4 pb-2 pl-4">
+                  <div className="flex flex-wrap gap-1.5 md:gap-3 pb-1 pl-3">
                     {group.keys.map((key) => (
                       <ThemeButton key={key} themeKey={key} isSelected={selected === key} onSelect={onSelect} />
                     ))}
@@ -112,11 +113,12 @@ export default function ThemeSelector({ selected, onSelect }: ThemeSelectorProps
           </div>
         );
       })}
+      </div>
 
       {/* Preview */}
       <motion.div
         key={selected}
-        className="flex justify-center gap-3 md:gap-5 mt-3 text-4xl md:text-6xl"
+        className="flex justify-center gap-2 md:gap-4 mt-1 md:mt-2 text-3xl md:text-5xl"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
       >

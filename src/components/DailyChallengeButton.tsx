@@ -22,7 +22,7 @@ export default function DailyChallengeButton({ onClick }: DailyChallengeButtonPr
     <motion.button
       onClick={completed ? undefined : onClick}
       disabled={completed}
-      className={`relative overflow-hidden px-14 py-6 rounded-2xl font-bold text-3xl shadow-lg transition-colors ${
+      className={`relative overflow-hidden px-8 py-3 md:px-12 md:py-4 rounded-xl md:rounded-2xl font-bold text-xl md:text-2xl shadow-lg transition-colors ${
         completed
           ? 'bg-gradient-to-r from-green-400 to-emerald-500 text-white cursor-not-allowed opacity-80'
           : 'bg-gradient-to-r from-violet-500 to-purple-600 text-white'
@@ -31,10 +31,10 @@ export default function DailyChallengeButton({ onClick }: DailyChallengeButtonPr
       whileTap={completed ? {} : { scale: 0.95 }}
     >
       <div className="flex flex-col items-center gap-1">
-        <span className="text-4xl">
+        <span className="text-2xl md:text-3xl">
           {completed ? '✅' : '🎯'} 오늘의 도전
         </span>
-        <span className="text-xl opacity-90">
+        <span className="text-sm md:text-lg opacity-90">
           {theme.icon} {theme.name} · {diff.icon} {diff.label}
         </span>
         {completed && (
