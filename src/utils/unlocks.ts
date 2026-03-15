@@ -4,7 +4,7 @@ import { themeKeys } from '../utils/themes';
 const UNLOCK_STORAGE_KEY = 'memory-game-unlocked-themes';
 
 /** 기본 해금 테마 (처음부터 사용 가능) */
-const DEFAULT_UNLOCKED: ThemeKey[] = ['animals', 'fruits', 'vehicles', 'sports', 'christmas', 'pokemon', 'dragonball'];
+const DEFAULT_UNLOCKED: ThemeKey[] = ['animals', 'fruits', 'vehicles', 'sports', 'christmas', 'pixel', 'monsters'];
 
 /** 해금 가능한 테마 순서 (기본 해금 제외, themeKeys 순서대로) */
 const LOCKABLE_THEMES: ThemeKey[] = themeKeys.filter(

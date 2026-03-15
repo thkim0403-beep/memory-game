@@ -11,9 +11,9 @@ export type ThemeKey =
   | 'halloween' | 'ocean' | 'music' | 'dinosaur' | 'gems' | 'fairytale' | 'robot' | 'dessert'
   | 'space' | 'toys' | 'school' | 'summer' | 'jobs' | 'circus' | 'rainbow'
   | 'weather' | 'buildings' | 'science' | 'hands' | 'zodiac' | 'family'
-  | 'pokemon' | 'smileys' | 'flags' | 'food' | 'nature' | 'dogs'
-  | 'cats' | 'digimon' | 'dragonball' | 'avatars' | 'foxes'
-  | 'harrypotter' | 'naruto' | 'photos';
+  | 'smileys' | 'flags' | 'food' | 'nature' | 'dogs'
+  | 'cats' | 'avatars' | 'photos'
+  | 'pixel' | 'monsters' | 'lorelei';
 
 export interface Theme {
   key: ThemeKey;

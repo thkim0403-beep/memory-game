@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { fallbackEmojis } from '../utils/api';
 
 describe('fallbackEmojis', () => {
-  const requiredKeys = ['smileys', 'flags', 'food', 'nature', 'pokemon'];
+  const requiredKeys = ['smileys', 'flags', 'food', 'nature', 'pixel', 'monsters', 'lorelei'];
 
   it('모든 API 테마에 대한 fallback이 존재한다', () => {
     requiredKeys.forEach((key) => {

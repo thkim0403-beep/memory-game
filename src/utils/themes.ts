@@ -238,16 +238,6 @@ export const themes: Record<ThemeKey, Theme> = {
     gradientTo: '#ec4899',
   },
   // API themes
-  pokemon: {
-    key: 'pokemon',
-    name: '포켓몬',
-    icon: '🎮',
-    emojis: [],
-    gradient: 'from-yellow-400 to-red-500',
-    gradientFrom: '#facc15',
-    gradientTo: '#ef4444',
-    isApi: true,
-  },
   smileys: {
     key: 'smileys',
     name: '표정',
@@ -308,26 +298,6 @@ export const themes: Record<ThemeKey, Theme> = {
     gradientTo: '#f59e0b',
     isApi: true,
   },
-  digimon: {
-    key: 'digimon',
-    name: '디지몬',
-    icon: '🐲',
-    emojis: [],
-    gradient: 'from-blue-500 to-cyan-400',
-    gradientFrom: '#3b82f6',
-    gradientTo: '#22d3ee',
-    isApi: true,
-  },
-  dragonball: {
-    key: 'dragonball',
-    name: '드래곤볼',
-    icon: '🐉',
-    emojis: [],
-    gradient: 'from-orange-500 to-yellow-400',
-    gradientFrom: '#f97316',
-    gradientTo: '#facc15',
-    isApi: true,
-  },
   avatars: {
     key: 'avatars',
     name: '아바타',
@@ -336,36 +306,6 @@ export const themes: Record<ThemeKey, Theme> = {
     gradient: 'from-teal-400 to-emerald-500',
     gradientFrom: '#2dd4bf',
     gradientTo: '#10b981',
-    isApi: true,
-  },
-  foxes: {
-    key: 'foxes',
-    name: '여우',
-    icon: '🦊',
-    emojis: [],
-    gradient: 'from-orange-400 to-red-400',
-    gradientFrom: '#fb923c',
-    gradientTo: '#f87171',
-    isApi: true,
-  },
-  harrypotter: {
-    key: 'harrypotter',
-    name: '해리포터',
-    icon: '🧙',
-    emojis: [],
-    gradient: 'from-amber-600 to-red-800',
-    gradientFrom: '#d97706',
-    gradientTo: '#991b1b',
-    isApi: true,
-  },
-  naruto: {
-    key: 'naruto',
-    name: '나루토',
-    icon: '🍥',
-    emojis: [],
-    gradient: 'from-orange-500 to-amber-600',
-    gradientFrom: '#f97316',
-    gradientTo: '#d97706',
     isApi: true,
   },
   photos: {
@@ -378,6 +318,36 @@ export const themes: Record<ThemeKey, Theme> = {
     gradientTo: '#475569',
     isApi: true,
   },
+  pixel: {
+    key: 'pixel',
+    name: '픽셀 친구',
+    icon: '👾',
+    emojis: [],
+    gradient: 'from-green-400 to-cyan-500',
+    gradientFrom: '#4ade80',
+    gradientTo: '#06b6d4',
+    isApi: true,
+  },
+  monsters: {
+    key: 'monsters',
+    name: '몬스터',
+    icon: '🤖',
+    emojis: [],
+    gradient: 'from-blue-500 to-cyan-400',
+    gradientFrom: '#3b82f6',
+    gradientTo: '#22d3ee',
+    isApi: true,
+  },
+  lorelei: {
+    key: 'lorelei',
+    name: '스케치',
+    icon: '✏️',
+    emojis: [],
+    gradient: 'from-rose-400 to-purple-500',
+    gradientFrom: '#fb7185',
+    gradientTo: '#a855f7',
+    isApi: true,
+  },
 };
 
 export const difficulties: Record<Difficulty, DifficultyConfig> = {
@@ -388,9 +358,9 @@ export const difficulties: Record<Difficulty, DifficultyConfig> = {
 
 // Grouped by category for display
 export const themeGroups: { label: string; icon: string; keys: ThemeKey[] }[] = [
-  { label: '동물', icon: '🐾', keys: ['animals', 'ocean', 'dinosaur', 'dogs', 'cats', 'foxes'] },
+  { label: '동물', icon: '🐾', keys: ['animals', 'ocean', 'dinosaur', 'dogs', 'cats'] },
   { label: '먹거리', icon: '🍽️', keys: ['fruits', 'food', 'dessert'] },
-  { label: '캐릭터', icon: '🎮', keys: ['pokemon', 'digimon', 'dragonball', 'harrypotter', 'naruto', 'avatars'] },
+  { label: '캐릭터', icon: '🎮', keys: ['avatars', 'pixel', 'monsters', 'lorelei'] },
   { label: '활동', icon: '⚡', keys: ['sports', 'music', 'school', 'jobs', 'circus', 'hands'] },
   { label: '자연/우주', icon: '🌍', keys: ['nature', 'space', 'summer', 'rainbow', 'weather'] },
   { label: '판타지', icon: '✨', keys: ['fairytale', 'halloween', 'gems', 'zodiac'] },
@@ -405,8 +375,7 @@ export const staticThemeKeys: ThemeKey[] = [
   'weather', 'buildings', 'science', 'hands', 'zodiac', 'family',
 ];
 export const apiThemeKeys: ThemeKey[] = [
-  'pokemon', 'smileys', 'flags', 'food', 'nature', 'dogs',
-  'cats', 'digimon', 'dragonball', 'avatars', 'foxes',
-  'harrypotter', 'naruto', 'photos',
+  'smileys', 'flags', 'food', 'nature', 'dogs',
+  'cats', 'avatars', 'photos', 'pixel', 'monsters', 'lorelei',
 ];
 export const themeKeys: ThemeKey[] = [...staticThemeKeys, ...apiThemeKeys];
