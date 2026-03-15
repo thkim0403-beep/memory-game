@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-jua: 'Jua', sans-serif;
+}
+
+body {
+  font-family: 'Jua', sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 50%, #fccb90 100%);
+  background-attachment: fixed;
+  transition: background 0.3s ease;
+}
+
+.dark body,
+:is(.dark) body {
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+  color: #e2e8f0;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Dark mode overrides for card front face */
+:is(.dark) .card-front {
+  background-color: #374151;
+}
+
+/* Dark header/buttons */
+:is(.dark) .bg-white\/60 {
+  background-color: rgba(55, 65, 81, 0.6);
+}
+
+:is(.dark) .bg-white\/80 {
+  background-color: rgba(55, 65, 81, 0.8);
+}
+
+:is(.dark) .bg-white\/70 {
+  background-color: rgba(55, 65, 81, 0.7);
+}
