@@ -237,6 +237,42 @@ export const themes: Record<ThemeKey, Theme> = {
     gradientFrom: '#fb7185',
     gradientTo: '#ec4899',
   },
+  party: {
+    key: 'party',
+    name: '파티',
+    icon: '🎉',
+    emojis: ['🎉', '🎊', '🎈', '🎁', '🎂', '🥂', '🎆', '🎇', '🪅', '🎭', '🎪', '🕺', '💃', '🪩', '🧁', '🥳'],
+    gradient: 'from-pink-400 to-purple-500',
+    gradientFrom: '#f472b6',
+    gradientTo: '#a855f7',
+  },
+  travel: {
+    key: 'travel',
+    name: '여행',
+    icon: '✈️',
+    emojis: ['🗼', '🗽', '🏰', '⛩️', '🎡', '🗿', '🏔️', '✈️', '🧳', '🗺️', '🏖️', '🚂', '🛳️', '⛱️', '🎒', '🌍'],
+    gradient: 'from-sky-400 to-indigo-500',
+    gradientFrom: '#38bdf8',
+    gradientTo: '#6366f1',
+  },
+  camping: {
+    key: 'camping',
+    name: '캠핑',
+    icon: '🏕️',
+    emojis: ['🏕️', '⛺', '🔥', '🌲', '🏔️', '🐻', '🦌', '🎣', '🛶', '🧭', '🔦', '🌙', '⭐', '🪵', '🥾', '🎒'],
+    gradient: 'from-green-500 to-emerald-700',
+    gradientFrom: '#22c55e',
+    gradientTo: '#047857',
+  },
+  farm: {
+    key: 'farm',
+    name: '농장',
+    icon: '🐮',
+    emojis: ['🐮', '🐷', '🐔', '🐴', '🐑', '🐐', '🐰', '🦆', '🌾', '🚜', '🏠', '🌻', '🥕', '🥚', '🐾', '🌽'],
+    gradient: 'from-yellow-400 to-green-500',
+    gradientFrom: '#facc15',
+    gradientTo: '#22c55e',
+  },
   // API themes
   smileys: {
     key: 'smileys',
@@ -358,14 +394,14 @@ export const difficulties: Record<Difficulty, DifficultyConfig> = {
 
 // Grouped by category for display
 export const themeGroups: { label: string; icon: string; keys: ThemeKey[] }[] = [
-  { label: '동물', icon: '🐾', keys: ['animals', 'ocean', 'dinosaur', 'dogs', 'cats'] },
+  { label: '동물', icon: '🐾', keys: ['animals', 'ocean', 'dinosaur', 'farm', 'dogs', 'cats'] },
   { label: '먹거리', icon: '🍽️', keys: ['fruits', 'food', 'dessert'] },
   { label: '캐릭터', icon: '🎮', keys: ['avatars', 'pixel', 'monsters', 'lorelei'] },
-  { label: '활동', icon: '⚡', keys: ['sports', 'music', 'school', 'jobs', 'circus', 'hands'] },
-  { label: '자연/우주', icon: '🌍', keys: ['nature', 'space', 'summer', 'rainbow', 'weather'] },
+  { label: '활동', icon: '⚡', keys: ['sports', 'music', 'school', 'jobs', 'circus', 'hands', 'party'] },
+  { label: '자연/우주', icon: '🌍', keys: ['nature', 'space', 'summer', 'rainbow', 'weather', 'camping'] },
   { label: '판타지', icon: '✨', keys: ['fairytale', 'halloween', 'gems', 'zodiac'] },
   { label: '사람/생활', icon: '👨‍👩‍👦', keys: ['family', 'smileys', 'buildings', 'science'] },
-  { label: '기타', icon: '🎲', keys: ['vehicles', 'robot', 'toys', 'christmas', 'flags', 'photos'] },
+  { label: '기타', icon: '🎲', keys: ['vehicles', 'robot', 'toys', 'christmas', 'flags', 'photos', 'travel'] },
 ];
 
 export const staticThemeKeys: ThemeKey[] = [
@@ -373,6 +409,7 @@ export const staticThemeKeys: ThemeKey[] = [
   'halloween', 'ocean', 'music', 'dinosaur', 'gems', 'fairytale', 'robot', 'dessert',
   'space', 'toys', 'school', 'summer', 'jobs', 'circus', 'rainbow',
   'weather', 'buildings', 'science', 'hands', 'zodiac', 'family',
+  'party', 'travel', 'camping', 'farm',
 ];
 export const apiThemeKeys: ThemeKey[] = [
   'smileys', 'flags', 'food', 'nature', 'dogs',

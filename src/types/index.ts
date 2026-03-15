@@ -13,7 +13,8 @@ export type ThemeKey =
   | 'weather' | 'buildings' | 'science' | 'hands' | 'zodiac' | 'family'
   | 'smileys' | 'flags' | 'food' | 'nature' | 'dogs'
   | 'cats' | 'avatars' | 'photos'
-  | 'pixel' | 'monsters' | 'lorelei';
+  | 'pixel' | 'monsters' | 'lorelei'
+  | 'party' | 'travel' | 'camping' | 'farm';
 
 export interface Theme {
   key: ThemeKey;
