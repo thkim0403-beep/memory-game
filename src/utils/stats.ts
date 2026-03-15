@@ -6,6 +6,7 @@ export interface GameStats {
   totalPlays: number;
   totalClears: number;
   themePlays: Partial<Record<ThemeKey, number>>;
+  difficultyPlays: Partial<Record<Difficulty, number>>;
   totalAttempts: number;
   totalTime: number;
   /** 클리어한 게임의 시도 횟수만 누적 */
@@ -23,6 +24,7 @@ function loadStats(): GameStats {
     totalPlays: 0,
     totalClears: 0,
     themePlays: {},
+    difficultyPlays: {},
     totalAttempts: 0,
     totalTime: 0,
     clearAttempts: 0,
@@ -39,7 +41,7 @@ function saveStats(stats: GameStats): void {
 
 export function recordPlay(
   theme: ThemeKey,
-  _difficulty: Difficulty,
+  difficulty: Difficulty,
   attempts: number,
   time: number,
   cleared: boolean,
@@ -51,6 +53,8 @@ export function recordPlay(
     stats.clearAttempts = (stats.clearAttempts ?? 0) + attempts;
   }
   stats.themePlays[theme] = (stats.themePlays[theme] || 0) + 1;
+  if (!stats.difficultyPlays) stats.difficultyPlays = {};
+  stats.difficultyPlays[difficulty] = (stats.difficultyPlays[difficulty] || 0) + 1;
   stats.totalAttempts += attempts;
   stats.totalTime += time;
   saveStats(stats);

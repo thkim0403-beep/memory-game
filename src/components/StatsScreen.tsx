@@ -19,6 +19,14 @@ export default function StatsScreen({ onBack }: StatsScreenProps) {
     ? Math.round((stats.clearAttempts ?? stats.totalAttempts) / stats.totalClears * 10) / 10
     : 0;
 
+  // 난이도별 플레이 횟수
+  const difficultyLabels: Record<string, { name: string; icon: string }> = {
+    easy: { name: '쉬움', icon: '🐣' },
+    normal: { name: '보통', icon: '🐥' },
+    hard: { name: '어려움', icon: '🦅' },
+  };
+  const diffPlays = stats.difficultyPlays ?? {};
+
   // 가장 많이 한 테마 TOP 5
   const topThemes = Object.entries(stats.themePlays)
     .sort(([, a], [, b]) => (b ?? 0) - (a ?? 0))
@@ -58,6 +66,28 @@ export default function StatsScreen({ onBack }: StatsScreenProps) {
             <div className="text-4xl mb-2">{item.icon}</div>
             <div className="text-3xl md:text-4xl font-bold dark:text-white">{item.value}</div>
             <div className="text-lg md:text-xl text-gray-500 dark:text-gray-400 mt-1">{item.label}</div>
+          </motion.div>
+        ))}
+      </motion.div>
+
+      {/* Difficulty Breakdown */}
+      <motion.div
+        className="grid grid-cols-3 gap-3 md:gap-4 w-full max-w-2xl mb-8"
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.25 }}
+      >
+        {(['easy', 'normal', 'hard'] as const).map((d, i) => (
+          <motion.div
+            key={d}
+            className="bg-white/80 dark:bg-gray-800/80 backdrop-blur rounded-2xl p-4 shadow-lg text-center"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.25 + i * 0.08 }}
+          >
+            <div className="text-3xl mb-1">{difficultyLabels[d].icon}</div>
+            <div className="text-2xl md:text-3xl font-bold dark:text-white">{diffPlays[d] ?? 0}판</div>
+            <div className="text-base md:text-lg text-gray-500 dark:text-gray-400 mt-1">{difficultyLabels[d].name}</div>
           </motion.div>
         ))}
       </motion.div>

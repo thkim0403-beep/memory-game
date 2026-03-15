@@ -94,11 +94,11 @@ export default function StartScreen({ onStart, onStartStage, onStartVs, onStartT
               >
                 <div className="text-4xl md:text-6xl mb-1">{d.icon}</div>
                 <div className="font-bold text-xl md:text-2xl dark:text-white">{d.label}</div>
-                <div className="text-sm md:text-lg text-gray-500">
+                <div className="text-sm md:text-lg text-gray-500 dark:text-gray-400">
                   {d.cols}x{d.rows} ({d.pairs}쌍)
                 </div>
                 {rec && (
-                  <div className="text-xs md:text-base text-purple-600 font-bold mt-1">
+                  <div className="text-xs md:text-base text-purple-600 dark:text-purple-400 font-bold mt-1">
                     🏆 {formatRecord(rec)}
                   </div>
                 )}

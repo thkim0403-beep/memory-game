@@ -25,6 +25,8 @@ export function useVsGame() {
   const matchAnimTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const resultPhaseTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const shakeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const gameGenRef = useRef(0);
+  const flippedCountRef = useRef(0);
 
   const theme: Theme = themes[themeKey];
   const diffConfig: DifficultyConfig = difficulties[difficulty];
@@ -53,16 +55,20 @@ export function useVsGame() {
       setElapsedTime(0);
       setMatchedAnimIds(new Set());
       setShakeAnimIds(new Set());
+      flippedCountRef.current = 0;
 
       const t = themes[tk];
       const d = difficulties[diff];
 
       if (t.isApi) {
+        const gen = ++gameGenRef.current;
         setPhase('loading');
         try {
           const data = await loadApiTheme(tk, d.pairs);
+          if (gen !== gameGenRef.current) return;
           setCards(createCards(data.emojis, d.pairs, data.images));
         } catch {
+          if (gen !== gameGenRef.current) return;
           const fb = fallbackEmojis[tk] || themes.animals.emojis;
           setCards(createCards(fb, d.pairs));
         }
@@ -84,10 +90,11 @@ export function useVsGame() {
 
   const flipCard = useCallback(
     (id: string) => {
-      if (isChecking) return;
+      if (isChecking || flippedCountRef.current >= 2) return;
       const card = cards.find((c) => c.id === id);
       if (!card || card.isMatched || card.isFlipped) return;
 
+      flippedCountRef.current++;
       playFlip();
 
       const newCards = cards.map((c) =>
@@ -117,6 +124,7 @@ export function useVsGame() {
           setCards(matched);
           setFlippedIds([]);
           setIsChecking(false);
+          flippedCountRef.current = 0;
 
           setScores(prev => {
             const next = [...prev];
@@ -143,6 +151,7 @@ export function useVsGame() {
             );
             setFlippedIds([]);
             setIsChecking(false);
+            flippedCountRef.current = 0;
             setCurrentPlayer((p) => (p === 0 ? 1 : 0));
           }, 1000);
         }

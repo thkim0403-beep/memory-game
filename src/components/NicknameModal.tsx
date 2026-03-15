@@ -43,7 +43,7 @@ export default function NicknameModal({ rank, open, onSubmit, onClose }: Nicknam
           exit={{ opacity: 0 }}
         >
           <motion.div
-            className="bg-white rounded-3xl p-8 md:p-10 shadow-2xl max-w-md w-full text-center"
+            className="bg-white dark:bg-gray-800 rounded-3xl p-8 md:p-10 shadow-2xl max-w-md w-full text-center"
             initial={{ scale: 0.5, opacity: 0, y: 50 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.5, opacity: 0, y: 50 }}
@@ -57,10 +57,10 @@ export default function NicknameModal({ rank, open, onSubmit, onClose }: Nicknam
               🏆
             </motion.div>
 
-            <h2 className="text-3xl md:text-4xl font-bold mb-2">
+            <h2 className="text-3xl md:text-4xl font-bold mb-2 dark:text-white">
               랭킹 {rank}위!
             </h2>
-            <p className="text-xl text-gray-600 mb-6">
+            <p className="text-xl text-gray-600 dark:text-gray-300 mb-6">
               이름을 입력해주세요!
             </p>
 
@@ -72,7 +72,7 @@ export default function NicknameModal({ rank, open, onSubmit, onClose }: Nicknam
               onKeyDown={handleKeyDown}
               maxLength={10}
               placeholder="이름 입력 (최대 10자)"
-              className="w-full text-2xl md:text-3xl font-bold text-center py-4 px-6 rounded-2xl border-3 border-purple-300 focus:border-purple-500 focus:outline-none bg-purple-50 transition-colors"
+              className="w-full text-2xl md:text-3xl font-bold text-center py-4 px-6 rounded-2xl border-3 border-purple-300 dark:border-purple-600 focus:border-purple-500 focus:outline-none bg-purple-50 dark:bg-gray-700 dark:text-white transition-colors"
               style={{ fontFamily: "'Jua', sans-serif" }}
             />
 
@@ -87,7 +87,7 @@ export default function NicknameModal({ rank, open, onSubmit, onClose }: Nicknam
 
             <button
               onClick={() => onClose ? onClose() : onSubmit('이름없음')}
-              className="mt-3 w-full text-gray-400 hover:text-gray-600 py-2 font-bold text-lg transition-colors"
+              className="mt-3 w-full text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 py-2 font-bold text-lg transition-colors"
             >
               건너뛰기
             </button>

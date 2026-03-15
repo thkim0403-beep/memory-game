@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import type { Theme } from '../types';
 import { formatTime } from '../utils/records';
+import { STAGE_ORDER, difficulties } from '../utils/themes';
 
 interface StageClearScreenProps {
   totalAttempts: number;
@@ -10,10 +11,11 @@ interface StageClearScreenProps {
   onGoToStart: () => void;
 }
 
+const TOTAL_STAGE_PAIRS = STAGE_ORDER.reduce((sum, d) => sum + difficulties[d].pairs, 0);
+
 function getTotalStars(attempts: number): number {
-  // Total pairs across 3 stages: 6 + 8 + 10 = 24
-  if (attempts <= 36) return 3; // 24 * 1.5
-  if (attempts <= 48) return 2; // 24 * 2
+  if (attempts <= Math.floor(TOTAL_STAGE_PAIRS * 1.5)) return 3;
+  if (attempts <= TOTAL_STAGE_PAIRS * 2) return 2;
   return 1;
 }
 
@@ -36,7 +38,7 @@ export default function StageClearScreen({
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-4">
       <motion.h1
-        className="text-4xl md:text-6xl font-bold mb-2"
+        className="text-4xl md:text-6xl font-bold mb-2 dark:text-white"
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ type: 'spring', stiffness: 200, damping: 10 }}

@@ -115,7 +115,7 @@ export default function ClearScreen({
       />
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4">
         <motion.h1
-          className="text-5xl md:text-6xl font-bold mb-4"
+          className="text-5xl md:text-6xl font-bold mb-4 dark:text-white"
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: 'spring', stiffness: 200, damping: 10 }}

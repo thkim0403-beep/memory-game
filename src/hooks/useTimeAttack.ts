@@ -18,7 +18,7 @@ import { playFlip, playMatch, playMismatch, playClear, playCombo } from '../util
 export type TimeAttackPhase = 'setup' | 'loading' | 'playing' | 'clear' | 'timeout';
 
 /** 난이도별 제한 시간 (초) */
-const TIME_LIMITS: Record<Difficulty, number> = {
+export const TIME_LIMITS: Record<Difficulty, number> = {
   easy: 60,
   normal: 90,
   hard: 120,
@@ -57,6 +57,8 @@ export function useTimeAttack() {
   const clearPhaseTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const attemptsRef = useRef(0);
   const comboRef = useRef(0);
+  const gameGenRef = useRef(0);
+  const flippedCountRef = useRef(0);
 
   const theme = themes[themeKey];
   const diffConfig = difficulties[difficulty];
@@ -105,6 +107,7 @@ export function useTimeAttack() {
       setMatchedAnimIds(new Set());
       setShakeAnimIds(new Set());
       setResult(null);
+      flippedCountRef.current = 0;
 
       const t = themes[selectedTheme];
       const d = difficulties[selectedDifficulty];
@@ -112,11 +115,14 @@ export function useTimeAttack() {
       setRemainingTime(limit);
 
       if (t.isApi) {
+        const gen = ++gameGenRef.current;
         setPhase('loading');
         try {
           const data = await loadApiTheme(selectedTheme, d.pairs);
+          if (gen !== gameGenRef.current) return;
           setCards(createCards(data.emojis, d.pairs, data.images));
         } catch {
+          if (gen !== gameGenRef.current) return;
           const fb = fallbackEmojis[selectedTheme] || themes.animals.emojis;
           setCards(createCards(fb, d.pairs));
         }
@@ -162,10 +168,11 @@ export function useTimeAttack() {
 
   const flipCard = useCallback(
     (id: string) => {
-      if (isChecking) return;
+      if (isChecking || flippedCountRef.current >= 2) return;
       const card = cards.find((c) => c.id === id);
       if (!card || card.isMatched || card.isFlipped) return;
 
+      flippedCountRef.current++;
       playFlip();
 
       const newCards = cards.map((c) =>
@@ -201,6 +208,7 @@ export function useTimeAttack() {
           setCards(matched);
           setFlippedIds([]);
           setIsChecking(false);
+          flippedCountRef.current = 0;
           setMatchedPairs((m) => {
             const next = m + 1;
             if (next === totalPairs) handleClear(newAttempts);
@@ -220,6 +228,7 @@ export function useTimeAttack() {
             );
             setFlippedIds([]);
             setIsChecking(false);
+            flippedCountRef.current = 0;
           }, 1000);
         }
       }
@@ -232,6 +241,7 @@ export function useTimeAttack() {
     if (matchAnimTimer.current) clearTimeout(matchAnimTimer.current);
     if (shakeTimeout.current) clearTimeout(shakeTimeout.current);
     if (clearPhaseTimeout.current) clearTimeout(clearPhaseTimeout.current);
+    setResult(null);
     setPhase('setup');
   }, []);
 

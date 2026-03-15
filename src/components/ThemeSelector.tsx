@@ -20,7 +20,7 @@ function ThemeButton({ themeKey, isSelected, onSelect }: { themeKey: ThemeKey; i
           ? 'bg-gray-200/70 text-gray-400 cursor-not-allowed dark:bg-gray-600/50 dark:text-gray-500'
           : isSelected
             ? 'text-white shadow-lg'
-            : 'bg-white/70 text-gray-700 hover:bg-white hover:shadow-md dark:bg-gray-700/70 dark:text-gray-200'
+            : 'bg-white/70 text-gray-700 hover:bg-white dark:hover:bg-gray-600 hover:shadow-md dark:bg-gray-700/70 dark:text-gray-200'
       }`}
       style={
         !locked && isSelected

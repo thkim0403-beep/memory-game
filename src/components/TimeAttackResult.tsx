@@ -23,7 +23,7 @@ export default function TimeAttackResult({ result, onRetry, onGoHome }: TimeAtta
         {cleared ? (
           <>
             <div className="text-8xl mb-4">🎉</div>
-            <h1 className="text-5xl md:text-6xl font-bold text-green-600">
+            <h1 className="text-5xl md:text-6xl font-bold text-green-600 dark:text-green-400">
               클리어!
             </h1>
           </>
@@ -52,7 +52,7 @@ export default function TimeAttackResult({ result, onRetry, onGoHome }: TimeAtta
         {cleared && (
           <div className="flex justify-between items-center">
             <span>⏳ 남은 시간</span>
-            <strong className="text-green-600">{formatTime(remainingTime)}</strong>
+            <strong className="text-green-600 dark:text-green-400">{formatTime(remainingTime)}</strong>
           </div>
         )}
 
@@ -71,14 +71,14 @@ export default function TimeAttackResult({ result, onRetry, onGoHome }: TimeAtta
         {cleared && (
           <>
             <hr className="border-gray-300 dark:border-gray-600" />
-            <div className="flex justify-between items-center text-yellow-600">
+            <div className="flex justify-between items-center text-yellow-600 dark:text-yellow-400">
               <span>⏳ 시간 보너스</span>
               <strong>+{bonusScore}점</strong>
             </div>
             <div className="flex justify-between items-center text-3xl font-bold">
               <span>🏆 총 점수</span>
               <motion.strong
-                className="text-purple-600"
+                className="text-purple-600 dark:text-purple-400"
                 initial={{ scale: 0 }}
                 animate={{ scale: [0, 1.3, 1] }}
                 transition={{ delay: 0.6, duration: 0.5 }}

@@ -61,6 +61,8 @@ export function useGame() {
   const shakeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const hintTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const encourageTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const gameGenRef = useRef(0);
+  const flippedCountRef = useRef(0);
 
   const theme = themes[themeKey];
   const diffConfig = difficulties[difficulty];
@@ -93,6 +95,7 @@ export function useGame() {
     setIsNewRecord(false);
     setRankPosition(null);
     maxComboRef.current = 0;
+    flippedCountRef.current = 0;
     setAchievementPopup([]);
   }, []);
 
@@ -106,11 +109,14 @@ export function useGame() {
       const d = difficulties[diff];
 
       if (t.isApi) {
+        const gen = ++gameGenRef.current;
         setPhase('loading');
         try {
           const data = await loadApiTheme(tk, d.pairs);
+          if (gen !== gameGenRef.current) return; // stale request, discard
           setCards(createCards(data.emojis, d.pairs, data.images));
         } catch {
+          if (gen !== gameGenRef.current) return; // stale request, discard
           const fb = fallbackEmojis[tk] || themes.animals.emojis;
           setCards(createCards(fb, d.pairs));
         }
@@ -291,7 +297,7 @@ export function useGame() {
       const stageDiff = STAGE_ORDER[stageIndex];
       recordPlay(themeKey, stageDiff, attempts + 1, elapsedTime, true);
 
-      if (stageIndex >= 2) {
+      if (stageIndex >= STAGE_ORDER.length - 1) {
         // Last stage: check achievements once
         const records = loadRecords();
         const clearedDifficulties = (Object.keys(records) as (keyof typeof records)[]).filter(
@@ -299,12 +305,13 @@ export function useGame() {
         );
         const stats = getStats();
         const uniqueThemesPlayed = Object.keys(stats.themePlays).length;
+        const cumulativePairs = STAGE_ORDER.reduce((sum, d) => sum + difficulties[d].pairs, 0);
         const newAchievements = checkAchievements({
           justCleared: true,
           attempts: newTotalAttempts,
-          totalPairs,
+          totalPairs: cumulativePairs,
           maxCombo: maxComboRef.current,
-          stars: getStars(attempts + 1, totalPairs),
+          stars: getStars(newTotalAttempts, cumulativePairs),
           clearedDifficulties,
           rankPosition: null,
           elapsedTime: newTotalTime,
@@ -330,10 +337,11 @@ export function useGame() {
 
   const flipCard = useCallback(
     (id: string) => {
-      if (isChecking || hintIds.size > 0) return;
+      if (isChecking || hintIds.size > 0 || flippedCountRef.current >= 2) return;
       const card = cards.find((c) => c.id === id);
       if (!card || card.isMatched || card.isFlipped) return;
 
+      flippedCountRef.current++;
       playFlip();
 
       const newCards = cards.map((c) =>
@@ -380,6 +388,7 @@ export function useGame() {
           setCards(matched);
           setFlippedIds([]);
           setIsChecking(false);
+          flippedCountRef.current = 0;
           setMatchedPairs((m) => {
             const next = m + 1;
             if (next === totalPairs) handleClear();
@@ -399,6 +408,7 @@ export function useGame() {
             );
             setFlippedIds([]);
             setIsChecking(false);
+            flippedCountRef.current = 0;
           }, 1000);
         }
       }

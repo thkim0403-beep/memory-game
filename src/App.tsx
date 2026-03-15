@@ -21,6 +21,7 @@ import AchievementsScreen from './components/AchievementsScreen';
 import AchievementPopup from './components/AchievementPopup';
 import { getDailyChallenge } from './utils/dailyChallenge';
 import { formatTime } from './utils/records';
+import type { ThemeKey, Difficulty } from './types';
 
 type AppMode = 'solo' | 'vs' | 'timeattack';
 
@@ -45,7 +46,7 @@ function App() {
     if (ta.phase === 'setup') {
       return (
         <TimeAttackSetup
-          onStart={(theme, diff) => ta.startTimeAttack(theme, diff)}
+          onStart={(theme: ThemeKey, diff: Difficulty) => ta.startTimeAttack(theme, diff)}
           onBack={() => setAppMode('solo')}
         />
       );
@@ -55,13 +56,13 @@ function App() {
       return (
         <div className="min-h-screen flex flex-col items-center justify-center gap-6">
           <div className="text-8xl animate-bounce">{ta.theme.icon}</div>
-          <p className="text-3xl font-bold animate-pulse">불러오는 중...</p>
+          <p className="text-3xl font-bold animate-pulse dark:text-white">불러오는 중...</p>
           <button
             onClick={() => {
               ta.goToSetup();
               setAppMode('solo');
             }}
-            className="px-10 py-4 rounded-xl font-bold text-2xl shadow-md transition-all duration-200 bg-white/80 hover:bg-white hover:scale-105"
+            className="px-10 py-4 rounded-xl font-bold text-2xl shadow-md transition-all duration-200 bg-white/80 dark:bg-gray-700/80 dark:text-white hover:bg-white dark:hover:bg-gray-600 hover:scale-105"
           >
             🏠 나가기
           </button>
@@ -88,7 +89,7 @@ function App() {
     return (
       <div className="min-h-screen flex flex-col items-center px-2 py-4">
         {/* Countdown timer header */}
-        <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 px-6 py-4 bg-white/60 backdrop-blur-sm rounded-2xl shadow-md mb-4 text-2xl md:text-3xl">
+        <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 px-6 py-4 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl shadow-md mb-4 text-2xl md:text-3xl dark:text-white">
           <div className="flex items-center gap-2">
             <span className="text-3xl">{ta.theme.icon}</span>
             <span className="font-bold">{ta.theme.name}</span>
@@ -124,7 +125,7 @@ function App() {
               ta.goToSetup();
               setAppMode('solo');
             }}
-            className="px-10 py-4 rounded-xl font-bold text-2xl shadow-md transition-all duration-200 bg-white/80 hover:bg-white hover:scale-105"
+            className="px-10 py-4 rounded-xl font-bold text-2xl shadow-md transition-all duration-200 bg-white/80 dark:bg-gray-700/80 dark:text-white hover:bg-white dark:hover:bg-gray-600 hover:scale-105"
           >
             🏠 나가기
           </button>
@@ -148,13 +149,13 @@ function App() {
       return (
         <div className="min-h-screen flex flex-col items-center justify-center gap-6">
           <div className="text-8xl animate-bounce">{vs.theme.icon}</div>
-          <p className="text-3xl font-bold animate-pulse">불러오는 중...</p>
+          <p className="text-3xl font-bold animate-pulse dark:text-white">불러오는 중...</p>
           <button
             onClick={() => {
               vs.goToSetup();
               setAppMode('solo');
             }}
-            className="px-10 py-4 rounded-xl font-bold text-2xl shadow-md transition-all duration-200 bg-white/80 hover:bg-white hover:scale-105"
+            className="px-10 py-4 rounded-xl font-bold text-2xl shadow-md transition-all duration-200 bg-white/80 dark:bg-gray-700/80 dark:text-white hover:bg-white dark:hover:bg-gray-600 hover:scale-105"
           >
             🏠 나가기
           </button>
@@ -187,7 +188,7 @@ function App() {
                   ? i === 0
                     ? 'bg-blue-500 text-white shadow-lg scale-105'
                     : 'bg-red-500 text-white shadow-lg scale-105'
-                  : 'bg-white/50 text-gray-500'
+                  : 'bg-white/50 dark:bg-gray-700/50 text-gray-500 dark:text-gray-400'
               }`}
             >
               {i === 0 ? '🔵' : '🔴'} {name}: {vs.scores[i]}쌍
@@ -210,7 +211,7 @@ function App() {
               vs.goToSetup();
               setAppMode('solo');
             }}
-            className="px-10 py-4 rounded-xl font-bold text-2xl shadow-md transition-all duration-200 bg-white/80 hover:bg-white hover:scale-105"
+            className="px-10 py-4 rounded-xl font-bold text-2xl shadow-md transition-all duration-200 bg-white/80 dark:bg-gray-700/80 dark:text-white hover:bg-white dark:hover:bg-gray-600 hover:scale-105"
           >
             🏠 나가기
           </button>
@@ -261,7 +262,7 @@ function App() {
         <p className="text-3xl font-bold animate-pulse">불러오는 중...</p>
         <button
           onClick={game.goToStart}
-          className="px-10 py-4 rounded-xl font-bold text-2xl shadow-md transition-all duration-200 bg-white/80 hover:bg-white hover:scale-105"
+          className="px-10 py-4 rounded-xl font-bold text-2xl shadow-md transition-all duration-200 bg-white/80 dark:bg-gray-700/80 dark:text-white hover:bg-white dark:hover:bg-gray-600 hover:scale-105"
         >
           🏠 나가기
         </button>
@@ -358,7 +359,7 @@ function App() {
         </button>
         <button
           onClick={game.goToStart}
-          className="px-5 md:px-10 py-2 md:py-4 rounded-xl font-bold text-lg md:text-2xl shadow-md transition-all duration-200 bg-white/80 dark:bg-gray-700/80 hover:bg-white hover:scale-105"
+          className="px-5 md:px-10 py-2 md:py-4 rounded-xl font-bold text-lg md:text-2xl shadow-md transition-all duration-200 bg-white/80 dark:bg-gray-700/80 hover:bg-white dark:hover:bg-gray-600 hover:scale-105"
         >
           🏠 나가기
         </button>

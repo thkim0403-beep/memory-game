@@ -8,14 +8,24 @@ interface DailyChallengeButtonProps {
 }
 
 export default function DailyChallengeButton({ onClick }: DailyChallengeButtonProps) {
+  const [challenge, setChallenge] = useState(() => getDailyChallenge());
   const [completed, setCompleted] = useState(false);
 
-  const challenge = getDailyChallenge();
   const theme = themes[challenge.theme];
   const diff = difficulties[challenge.difficulty];
 
   useEffect(() => {
     setCompleted(isDailyChallengeCompleted(challenge.dateStr));
+
+    // 1분마다 날짜 변경 체크 → 자정 이후 자동 갱신
+    const interval = setInterval(() => {
+      const latest = getDailyChallenge();
+      if (latest.dateStr !== challenge.dateStr) {
+        setChallenge(latest);
+        setCompleted(isDailyChallengeCompleted(latest.dateStr));
+      }
+    }, 60_000);
+    return () => clearInterval(interval);
   }, [challenge.dateStr]);
 
   return (

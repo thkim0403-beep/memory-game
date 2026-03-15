@@ -20,7 +20,7 @@ export default function VsSetup({ onStart, onBack }: VsSetupProps) {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-4 py-8">
       <motion.h1
-        className="text-4xl md:text-5xl font-bold mb-6"
+        className="text-4xl md:text-5xl font-bold mb-6 dark:text-white"
         initial={{ y: -30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
       >
@@ -28,12 +28,12 @@ export default function VsSetup({ onStart, onBack }: VsSetupProps) {
       </motion.h1>
 
       <motion.div
-        className="bg-white/70 rounded-2xl p-6 shadow-md mb-6 w-full max-w-sm"
+        className="bg-white/70 dark:bg-gray-800/70 rounded-2xl p-6 shadow-md mb-6 w-full max-w-sm"
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.1 }}
       >
-        <h2 className="text-lg font-bold mb-3">이름을 입력해!</h2>
+        <h2 className="text-lg font-bold mb-3 dark:text-white">이름을 입력해!</h2>
         <div className="space-y-3">
           <div className="flex items-center gap-2">
             <span className="text-2xl">🔵</span>
@@ -42,7 +42,7 @@ export default function VsSetup({ onStart, onBack }: VsSetupProps) {
               value={name1}
               onChange={(e) => setName1(e.target.value)}
               placeholder="Player 1"
-              className="flex-1 px-3 py-2 rounded-xl border-2 border-blue-200 focus:border-blue-400 outline-none font-bold"
+              className="flex-1 px-3 py-2 rounded-xl border-2 border-blue-200 focus:border-blue-400 outline-none font-bold dark:bg-gray-700 dark:border-blue-800 dark:text-white"
               maxLength={10}
             />
           </div>
@@ -53,7 +53,7 @@ export default function VsSetup({ onStart, onBack }: VsSetupProps) {
               value={name2}
               onChange={(e) => setName2(e.target.value)}
               placeholder="Player 2"
-              className="flex-1 px-3 py-2 rounded-xl border-2 border-red-200 focus:border-red-400 outline-none font-bold"
+              className="flex-1 px-3 py-2 rounded-xl border-2 border-red-200 focus:border-red-400 outline-none font-bold dark:bg-gray-700 dark:border-red-800 dark:text-white"
               maxLength={10}
             />
           </div>
@@ -74,7 +74,7 @@ export default function VsSetup({ onStart, onBack }: VsSetupProps) {
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.3 }}
       >
-        <h2 className="text-xl font-bold mb-3">난이도</h2>
+        <h2 className="text-xl font-bold mb-3 dark:text-white">난이도</h2>
         <div className="flex flex-wrap justify-center gap-3">
           {diffList.map((key) => {
             const d = difficulties[key];
@@ -86,7 +86,7 @@ export default function VsSetup({ onStart, onBack }: VsSetupProps) {
                 className={`px-5 py-3 rounded-2xl font-bold transition-colors ${
                   isSelected
                     ? 'bg-purple-500 text-white shadow-lg'
-                    : 'bg-white/70 hover:bg-white shadow-md'
+                    : 'bg-white/70 dark:bg-gray-700 hover:bg-white dark:hover:bg-gray-600 shadow-md dark:text-white'
                 }`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -107,7 +107,7 @@ export default function VsSetup({ onStart, onBack }: VsSetupProps) {
       >
         <motion.button
           onClick={onBack}
-          className="bg-white/70 px-6 py-3 rounded-xl font-bold text-lg shadow-md"
+          className="bg-white/70 dark:bg-gray-700 dark:text-white px-6 py-3 rounded-xl font-bold text-lg shadow-md"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >

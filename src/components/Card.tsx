@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { motion } from 'framer-motion';
 import type { CardData, Theme } from '../types';
 
@@ -10,7 +11,7 @@ interface CardProps {
   shakeAnim?: boolean;
 }
 
-export default function Card({ card, theme, index, onClick, matchAnim, shakeAnim }: CardProps) {
+const Card = memo(function Card({ card, theme, index, onClick, matchAnim, shakeAnim }: CardProps) {
   const { id, emoji, isFlipped, isMatched } = card;
 
   return (
@@ -71,4 +72,6 @@ export default function Card({ card, theme, index, onClick, matchAnim, shakeAnim
       </motion.div>
     </motion.div>
   );
-}
+});
+
+export default Card;

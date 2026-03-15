@@ -32,9 +32,7 @@ export function saveRecord(difficulty: Difficulty, attempts: number, time: numbe
 
 export function formatRecord(record: BestRecord | undefined): string {
   if (!record) return '-';
-  const m = Math.floor(record.time / 60);
-  const s = record.time % 60;
-  return `${record.attempts}회 / ${m}:${s.toString().padStart(2, '0')}`;
+  return `${record.attempts}회 / ${formatTime(record.time)}`;
 }
 
 // ── Ranking system ───────────────────────────────────────────
@@ -127,8 +125,12 @@ export function saveNickname(nickname: string): void {
 // ── Formatting helpers ───────────────────────────────────────
 
 export function formatTime(seconds: number): string {
-  const m = Math.floor(seconds / 60);
+  const h = Math.floor(seconds / 3600);
+  const m = Math.floor((seconds % 3600) / 60);
   const s = seconds % 60;
+  if (h > 0) {
+    return `${h}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+  }
   return `${m}:${s.toString().padStart(2, '0')}`;
 }
 

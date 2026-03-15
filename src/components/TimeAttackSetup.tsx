@@ -2,18 +2,13 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import type { ThemeKey, Difficulty } from '../types';
 import { difficulties } from '../utils/themes';
+import { TIME_LIMITS } from '../hooks/useTimeAttack';
 import ThemeSelector from './ThemeSelector';
 
 interface TimeAttackSetupProps {
   onStart: (theme: ThemeKey, difficulty: Difficulty) => void;
   onBack: () => void;
 }
-
-const TIME_LIMITS: Record<Difficulty, number> = {
-  easy: 60,
-  normal: 90,
-  hard: 120,
-};
 
 export default function TimeAttackSetup({ onStart, onBack }: TimeAttackSetupProps) {
   const [selectedTheme, setSelectedTheme] = useState<ThemeKey>('animals');
@@ -35,7 +30,7 @@ export default function TimeAttackSetup({ onStart, onBack }: TimeAttackSetupProp
       </motion.h1>
 
       <motion.p
-        className="text-2xl md:text-3xl text-gray-600 text-center"
+        className="text-2xl md:text-3xl text-gray-600 dark:text-gray-300 text-center"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.15 }}
@@ -56,7 +51,7 @@ export default function TimeAttackSetup({ onStart, onBack }: TimeAttackSetupProp
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.4 }}
       >
-        <h2 className="text-4xl md:text-5xl font-bold mb-5 text-center">
+        <h2 className="text-4xl md:text-5xl font-bold mb-5 text-center dark:text-white">
           난이도를 선택해!
         </h2>
         <div className="flex flex-wrap justify-center gap-8">
@@ -71,13 +66,13 @@ export default function TimeAttackSetup({ onStart, onBack }: TimeAttackSetupProp
               <motion.button
                 key={key}
                 onClick={() => onStart(selectedTheme, key)}
-                className="bg-white/70 hover:bg-white px-12 py-8 rounded-3xl shadow-md hover:shadow-lg transition-colors min-w-[200px]"
+                className="bg-white/70 dark:bg-gray-800/70 hover:bg-white dark:hover:bg-gray-700 px-12 py-8 rounded-3xl shadow-md hover:shadow-lg transition-colors min-w-[200px]"
                 whileHover={{ scale: 1.08 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <div className="text-7xl mb-3">{d.icon}</div>
-                <div className="font-bold text-3xl">{d.label}</div>
-                <div className="text-xl text-gray-500 mb-1">
+                <div className="font-bold text-3xl dark:text-white">{d.label}</div>
+                <div className="text-xl text-gray-500 dark:text-gray-400 mb-1">
                   {d.cols}x{d.rows} ({d.pairs}쌍)
                 </div>
                 <div className="text-xl text-red-500 font-bold mt-2">
@@ -97,7 +92,7 @@ export default function TimeAttackSetup({ onStart, onBack }: TimeAttackSetupProp
       >
         <motion.button
           onClick={onBack}
-          className="bg-white/80 hover:bg-white px-14 py-6 rounded-2xl font-bold text-3xl shadow-lg"
+          className="bg-white/80 dark:bg-gray-700 dark:text-white hover:bg-white dark:hover:bg-gray-600 px-14 py-6 rounded-2xl font-bold text-3xl shadow-lg"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
